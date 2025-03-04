@@ -12,14 +12,27 @@ fn main() {
     println!("{}", mul);
 
     //div
-    let div = 56/2;
-    let div_1 = 5.6/2.5;    
+    let div = 56 / 2;
+    let div_1 = 5.6 / 2.5;
     println!("{}\n{}", div, div_1);
 
-    let truncated = -5/3;
+    let truncated = -5 / 3;
     println!("{}", truncated);
 
-    //remainder 
-    let rem = -5%3;
+    //remainder
+    let rem = -5 % 3;
     println!("{}", rem);
+
+    //functions
+    fn test_function_inside() {
+        println!("test func inside main!");
+    }
+
+    test_function_inside();
+    test_function_outside();
+}
+
+//functions
+fn test_function_outside() {
+    println!("test func outside main!");
 }
