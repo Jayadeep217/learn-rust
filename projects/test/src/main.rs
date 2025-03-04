@@ -25,7 +25,7 @@ fn main() {
 
     //functions
     fn test_function_inside() {
-        println!("test func inside main!");
+        println!("test func inside main! {}", return_function());
     }
 
     test_function_inside();
@@ -34,5 +34,15 @@ fn main() {
 
 //functions
 fn test_function_outside() {
-    println!("test func outside main!");
+    println!("test func outside main! {}", five());
+}
+
+fn five() -> i8{
+    5
+}
+
+fn return_function() -> isize {
+    let mut a:isize = five().into();
+    a = 12343414 + a;
+    return  a.into();
 }
