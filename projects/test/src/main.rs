@@ -30,6 +30,8 @@ fn main() {
 
     test_function_inside();
     test_function_outside();
+
+    counter();
 }
 
 //functions
@@ -37,12 +39,26 @@ fn test_function_outside() {
     println!("test func outside main! {}", five());
 }
 
-fn five() -> i8{
+fn five() -> i8 {
     5
 }
 
 fn return_function() -> isize {
-    let mut a:isize = five().into();
+    let mut a: isize = five().into();
     a = 12343414 + a;
-    return  a.into();
+    return a.into();
+}
+
+fn counter() {
+    let mut count = 0;
+
+    let result = loop {
+        count += 1;
+
+        if count == 10 {
+            break count * 2;
+        }
+    };
+
+    println!("{}", result);
 }
