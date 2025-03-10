@@ -8,7 +8,13 @@ fn main() {
     // integer
     let int: isize = 867964312546786562;
     let int_d = 2147483647;
-    println!("{} || {}", int, int_d);
+    println!(
+        "type {} : {} || type {} : {}",
+        get_type(&int),
+        int,
+        get_type(&int_d),
+        int_d
+    );
 
     // float
     let flo32: f32 = 12.4232335;
@@ -16,7 +22,7 @@ fn main() {
     let flo32_d = 12.4232335;
     let flo64_d = 12.12345678901234567890;
     println!(
-        "{} : {} || {} : {} || {} : {} || {} : {}",
+        "type {} : {} || type {} : {} || type {} : {} || type {} : {}",
         get_type(&flo32),
         flo32,
         get_type(&flo64),
@@ -29,20 +35,34 @@ fn main() {
 
     // bool
     let boo: bool = true;
-    println!("{}", boo);
+    println!("type {} : {}", get_type(&boo), boo);
 
     //char
     let c: char = 'థ';
-    println!("{}", c);
+    println!("type {} : {}", get_type(&c), c);
 
     //Array
     let arr: [i8; 5] = [2, 3, 3, 5, 56];
     for ele in arr {
         println!("{}", ele);
     }
-    println!("{:?}", arr);
+    println!("type {} : {:?}", get_type(&arr), arr);
 
     //tuple
     let tup: (i8, [i8; 3], (f64, &str, bool)) = (2, [4, 5, 6], (21.54, "asd", false));
     println!("{:?}", tup);
+
+    //string
+    let s1 = "hello!";
+    let s2: &str = "asdsadasfsa";
+    let s3 = String::from("Hello, Rust!");
+    println!(
+        "type {} : {} || type {} : {} || type {} : {}",
+        get_type(&s1),
+        s1,
+        get_type(&s2),
+        s2,
+        get_type(&s3),
+        s3
+    );
 }
