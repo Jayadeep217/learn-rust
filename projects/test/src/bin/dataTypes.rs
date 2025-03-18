@@ -46,6 +46,9 @@ fn main() {
     for ele in arr {
         println!("{}", ele);
     }
+    for ele in &arr {
+        println!("{}", ele);
+    }
     println!("type {} : {:?}", get_type(&arr), arr);
 
     //tuple
@@ -65,4 +68,91 @@ fn main() {
         get_type(&s3),
         s3
     );
+
+    array_iteration();
+}
+
+fn array_iteration() {
+    let arr: [i32; 8] = [5, 7, 9, 4, 2, 45, 7, 2];
+    //=====================================================================
+    println!(
+        r#"▶️   simple for loop.
+✅ Consumes the array (moves ownership).
+✅ Works only for arrays, not vectors (use .iter() for vectors)."#
+    );
+    for item in arr {
+        println!("{}", item);
+    }
+    //=====================================================================
+    println!(
+        r#"▶️  simple for loop Iterate by Reference (&).
+✅ Safer than moving elements.
+✅ Useful when elements shouldn't be consumed."#
+    );
+    for item in &arr {
+        println!("{}", item);
+    }
+    //=====================================================================
+    println!(
+        r#"▶️  Using .iter() (Explicit Iteration)
+✅ arr.iter() returns an iterator over references (&T).
+✅ Elements are not moved, keeping arr accessible."#
+    );
+    for item in arr.iter() {
+        println!("{}", item);
+    }
+    //=====================================================================
+    println!(
+        r#"▶️  Using .iter_mut() (Mutable Iteration)
+✅ Works for mutable arrays.
+✅ *item += 1; dereferences the mutable reference."#
+    );
+    let mut arr_1 = [10, 20, 30, 40];
+    for item in arr_1.iter_mut() {
+        *item += 1;
+    }
+    println!("{:?}", arr);
+    //=====================================================================
+    println!(
+        r#"▶️  Using .enumerate() (Index + Value)
+✅ Preserves original array.
+✅ Efficient & readable."#
+    );
+    for (index, value) in arr.iter().enumerate() {
+        println!("Index: {}, Value: {}", index, value);
+    }
+    //=====================================================================
+    println!(
+        r#"▶️  Using while let Loop (Destructuring)
+✅ Works for iterators that may return None (like consuming a vector).
+✅ Explicit iteration via .next()."#
+    );
+    let mut arr_2 = [10, 20, 30, 40].iter();
+    while let Some(value) = arr_2.next() {
+        println!("{}", value);
+    }
+    //=====================================================================
+    println!(
+        r#"7️⃣  Using .into_iter() (Consumes Ownership)
+✅ Consumes arr completely (ownership moved).
+❌ arr cannot be used after this."#
+    );
+    for item in arr.into_iter() {
+        println!("{}", item);
+    }
+    //=====================================================================
+    println!(
+        r#"8️⃣  Using Iterators with .map()
+✅ Functional approach.
+✅ Returns a new collection (Vec<i32>)."#
+    );
+    let squared: Vec<i32> = arr.iter().map(|x| x * x).collect();
+    println!("{:?}", squared);
+    //=====================================================================
+    println!(
+        r#"9️⃣  Using for_each() (Functional Iteration)
+✅ Clean syntax but less flexible than for loop.
+✅ Cannot break early (unlike for loops)."#
+    );
+    arr.iter().for_each(|&x| println!("{}", x));
 }
